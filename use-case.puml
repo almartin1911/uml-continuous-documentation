@@ -8,15 +8,17 @@ skinparam TitleFontStyle bold
 actor :Web Client\nUser: as user <<Human>>
 actor :Azure Blob: as azblob <<Cloud Storage>>
 
+
 title Profile picture upload - Use case
 
 rectangle "Frontend WebApp" {
-    (User profile view)
-    (Storage service)    
-}
-
-rectangle "Users Microservice" {
-    (Update profile)
+    usecase (Login) as uc1
+    usecase (Edit profile) as uc2
+    usecase (File upload) as uc3
+    user -- uc1
+    user -- uc2
+    user -- uc3
+    uc3 -- azblob
 }
 
 center footer Copyleft (c) 2019
