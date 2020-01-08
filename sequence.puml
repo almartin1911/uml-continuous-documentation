@@ -1,0 +1,20 @@
+@startuml Current Behavior
+skinparam TitleFontStyle bold
+
+participant "Web Client" as client
+participant "Frontend WebApp" as webui
+participant "Dummy API" as dummyapi
+
+title Get resource - Sequence diagram
+
+client -> webui: Start some operation
+webui ->> dummyapi: GET resource/id
+alt Credentials expired
+webui <-- dummyapi: 401: HttpErrorMessage 
+else Valid credentials
+webui <-- dummyapi: 200 OK\npdf: HttpResponseMessage.Content
+end
+client <- webui: $window.open(content)
+
+center footer Copyleft (c) 2019
+@enduml
